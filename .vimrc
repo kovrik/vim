@@ -42,10 +42,10 @@ filetype off " required!
     Bundle 'vim-scripts/tComment'
     Bundle 'vim-scripts/VisIncr'
     Bundle 'wikitopian/hardmode'
-    Bundle 'Shougo/neocomplcache'
-    Bundle 'Shougo/neosnippet'
+    Bundle 'Shougo/neocomplcache.vim'
+    Bundle 'Shougo/neosnippet.vim'
     " Bundle 'Shougo/unite.vim'
-    Bundle 'Shougo/vimproc.vim'
+    " Bundle 'Shougo/vimproc.vim'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/closetag.vim'
     Bundle 'paradigm/TextObjectify'
@@ -62,7 +62,7 @@ filetype off " required!
     Bundle 'matchit.zip'
     Bundle 'javacomplete'
     Bundle 'EasyGrep'
-    Bundle 'VimOutliner'
+    " Bundle 'VimOutliner'
     Bundle 'gnupg.vim'
     "=== BUNDLES LIST END ==============
     if vundle_installed == 1
@@ -78,7 +78,7 @@ set background=dark
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 set modelines=0
-set lines=51 columns=189 " Default window size
+" set lines=51 columns=189 " Default window size
 set autoindent " tun autoindentation on
 set number " show line numbers
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -187,7 +187,7 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 " Sets minimum char length of syntax keyword.
 let g:neocomplcache_min_syntax_length = 3
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
+" buffer file name pattern that locks NeoComplCache. e.g. ku.vim or fuzzyfinder
 let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
 
 " syntastic tweaks
