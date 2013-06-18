@@ -43,7 +43,7 @@ filetype off " required!
     Bundle 'Shougo/neocomplcache.vim'
     Bundle 'Shougo/neosnippet.vim'
     " Bundle 'Shougo/unite.vim'
-    Bundle 'Shougo/vimproc.vim'
+    " Bundle 'Shougo/vimproc.vim'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/closetag.vim'
     Bundle 'paradigm/TextObjectify'
@@ -60,7 +60,7 @@ filetype off " required!
     Bundle 'matchit.zip'
     Bundle 'javacomplete'
     Bundle 'EasyGrep'
-    Bundle 'VimOutliner'
+    " Bundle 'VimOutliner'
     Bundle 'gnupg.vim'
     "=== BUNDLES LIST END ==============
     if vundle_installed == 1
@@ -76,7 +76,7 @@ set background=dark
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 set modelines=0
-set lines=51 columns=189 " Default window size
+" set lines=51 columns=189 " Default window size
 set autoindent " tun autoindentation on
 set number " show line numbers
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -173,10 +173,10 @@ let NERDTreeShowHidden=1
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-
+"
 " syntastic tweaks
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump=1
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_jump    = 1
 
 " omnicompleteion
 set complete-=i
@@ -239,7 +239,6 @@ function! DoWindowSwap()
 endfunction
 
 " === swap windows END
-
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 
@@ -358,9 +357,6 @@ cnoremap w!! %!sudo tee > /dev/null %
 " toggle centered-view mode on/off
 nnoremap \zz  :let &scrolloff=999-&scrolloff<CR>
 
-" Gundo toggle
-" nnoremap <F5> :GundoToggle<CR>
-
 " switch buffers
 nnoremap <leader>ls :ls<CR>:sb<Space>
 
@@ -378,10 +374,6 @@ nnoremap <F6> yyp<c-v>$r-
 
 " Underline the current line with dashes in insert mode
 inoremap <F6> <Esc>yyp<c-v>$r-A
-
-" use Tab and jk to move through omnicomplete list
-" inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-" inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
 noremap <C-S-I> :call <SID>SynStack()<CR>
 noremap <leader>cp :SyntasticJavacEditClasspath<CR>
