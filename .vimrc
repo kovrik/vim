@@ -26,8 +26,6 @@ filetype off " required!
     Bundle 'vim-scripts/perl-support.vim'
     Bundle 'vim-scripts/pmd.vim'
     Bundle 'kien/ctrlp.vim'
-    " Bundle 'Lokaltog/vim-easymotion'
-    " Bundle 'Lokaltog/vim-powerline'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-fugitive'
     Bundle 'fholgado/minibufexpl.vim'
@@ -42,8 +40,8 @@ filetype off " required!
     Bundle 'vim-scripts/tComment'
     Bundle 'vim-scripts/VisIncr'
     Bundle 'wikitopian/hardmode'
-    Bundle 'Shougo/neocomplcache'
-    Bundle 'Shougo/neosnippet'
+    Bundle 'Shougo/neocomplcache.vim'
+    Bundle 'Shougo/neosnippet.vim'
     " Bundle 'Shougo/unite.vim'
     Bundle 'Shougo/vimproc.vim'
     Bundle 'scrooloose/syntastic'
@@ -162,7 +160,8 @@ set termencoding=utf8
 set fencs=utf-8,cp1251,koi8-r,cp866 " encodings order
 set ffs=unix,dos,mac " file format order
 
-syntax on " syntax highlighting on
+" syntax highlighting on
+syntax on 
 
 set winaltkeys=no " disable menu access via ALT+<key>
 
@@ -174,21 +173,6 @@ let NERDTreeShowHidden=1
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
-" Turn neocomplcache on
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underscore completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Sets minimum char length of syntax keyword.
-let g:neocomplcache_min_syntax_length = 3
-" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
-let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
 
 " syntastic tweaks
 let g:syntastic_enable_signs=1
@@ -256,30 +240,66 @@ endfunction
 
 " === swap windows END
 
-" ====== KEY BINDINGS BEGIN ====================
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 
+" Neocomplcache BEGIN =========================
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+" Turn neocomplcache on
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underscore completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Sets minimum char length of syntax keyword.
+let g:neocomplcache_min_syntax_length = 3
+" buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
+let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
+
+" Recommended key-mappings.
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>   neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h>  neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>   neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
-" neocomplcache settings end -----------------
+" Neocomplcache END  =========================
 
-" neosnippet settings ------------------------
+" neosnippet BEGIN ===========================
 " Plugin key-mappings.
-inoremap <C-k> <Plug>(neosnippet_expand_or_jump)
-snoremap <C-k> <Plug>(neosnippet_expand_or_jump)
+" inoremap <C-k> <Plug>(neosnippet_expand_or_jump)
+" snoremap <C-k> <Plug>(neosnippet_expand_or_jump)
+" xnoremap <C-k> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
-inoremap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+" neosnippet END =============================
 
 " NERDTree
 noremap <F2> :NERDTreeToggle<CR>
@@ -287,7 +307,8 @@ noremap <F2> :NERDTreeToggle<CR>
 " map perltidy (only for selected blocks in visual mode!)
 vnoremap <Leader>pt :!perltidy -l=0 -lp -cti=1 -pt=2 -bt=2 -sbt=2 -ce <CR>
 
-noremap Q :q " dont use Q for Ex mode
+" dont use Q for Ex mode
+noremap Q :q
 
 " disable arrows
 nnoremap <up>     <nop>
@@ -363,16 +384,7 @@ inoremap <F6> <Esc>yyp<c-v>$r-A
 " inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
 noremap <C-S-I> :call <SID>SynStack()<CR>
-" ====== KEY BINDINGS END  ====================
-
-" let g:EasyMotion_leader_key = '<Leader>'
-
-" powerline
-" if has("gui_running")
-"   let g:Powerline_symbols = 'fancy'
-" else
-"   let g:Powerline_symbols = 'compatible'
-" endif
+noremap <leader>cp :SyntasticJavacEditClasspath<CR>
 
 let g:tex_flavor='latex'
 
@@ -583,6 +595,19 @@ function! Mode()
         endif
     endif
 
+" no    Operator-pending
+" CTRL-V    Visual blockwise
+" s    Select by character
+" S    Select by line
+" CTRL-S    Select blockwise
+" Rv    Virtual Replace |gR|
+" cv    Vim Ex mode |gQ|
+" ce    Normal Ex mode |Q|
+" r    Hit-enter prompt
+" rm    The -- more -- prompt
+" r?    A |:confirm| query of some sort
+" !    Shell or external command is executing
+
     if l:mode ==# "n"
         return " NORMAL "
     elseif l:mode ==# "i"
@@ -595,6 +620,14 @@ function! Mode()
         return " V·LINE "
     elseif l:mode ==# "^V"
         return " V·BLOCK "
+    "-------------------- "
+    elseif l:mode ==# "c"
+        return " COMMAND-LINE "
+    elseif l:mode ==# "no"
+        return " OPERATOR-PENDING "
+    elseif l:mode ==# "Rv"
+        return " VIRTUAL REPLACE "
+    "-------------------- "
     else
         return l:mode
     endif
@@ -619,6 +652,10 @@ set statusline+=\ %8*
 set statusline+=%7*\ %p%%\
 set statusline+=%6*%5*\ \ %l:%c\
 " " }}}2
+
+" Maven
+set makeprg=mvn\ compile\ -q\ -f\ .\pom.xml
+set errorformat=\[ERROR]\ %f:[%l\\,%v]\ %m
 
 " turn on filetypes
 set nopaste
