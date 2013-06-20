@@ -43,7 +43,7 @@ filetype off " required!
     Bundle 'Shougo/neocomplcache.vim'
     Bundle 'Shougo/neosnippet.vim'
     " Bundle 'Shougo/unite.vim'
-    " Bundle 'Shougo/vimproc.vim'
+    Bundle 'Shougo/vimproc.vim'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/closetag.vim'
     Bundle 'paradigm/TextObjectify'
@@ -60,7 +60,7 @@ filetype off " required!
     Bundle 'matchit.zip'
     Bundle 'javacomplete'
     Bundle 'EasyGrep'
-    " Bundle 'VimOutliner'
+    Bundle 'VimOutliner'
     Bundle 'gnupg.vim'
     "=== BUNDLES LIST END ==============
     if vundle_installed == 1
@@ -71,16 +71,17 @@ filetype off " required!
         endif
     endif
 " === Setting up Vundle end ==============================================
-
 set background=dark
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 set modelines=0
-" set lines=51 columns=189 " Default window size
-set autoindent " tun autoindentation on
-set number " show line numbers
+" turn autoindentation on
+set autoindent
+" show line numbers
+set number
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
-set magic " For regular expressions turn magic on
+" For regular expressions turn magic on
+set magic
 
 " tab = 4 spaces
 set tabstop=4
@@ -111,7 +112,7 @@ set wrap " turn on wrapping
 set textwidth=79
 set formatoptions=qrn1
 " set colorcolumn=85
-
+ 
 set vb
 set lbr                                    " wrap whole words
 set hidden                                 " не выгружать буфер когда переключаешься на другой
@@ -134,7 +135,8 @@ set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
-set pastetoggle=<F6> " keep indentation when pasting
+" keep indentation when pasting
+set pastetoggle=<F7>
 
 " search settings
 set ignorecase " ignore case when searching
@@ -173,10 +175,10 @@ let NERDTreeShowHidden=1
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-"
+
 " syntastic tweaks
-let g:syntastic_enable_signs = 1
-let g:syntastic_auto_jump    = 1
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=1
 
 " omnicompleteion
 set complete-=i
@@ -239,6 +241,7 @@ function! DoWindowSwap()
 endfunction
 
 " === swap windows END
+
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 
@@ -370,10 +373,10 @@ vnoremap <Space> za
 nnoremap Y y$
 
 " Underline the current line with dashes in normal mode
-nnoremap <F6> yyp<c-v>$r-
+nnoremap <F6> yyp<c-v>$r=
 
 " Underline the current line with dashes in insert mode
-inoremap <F6> <Esc>yyp<c-v>$r-A
+inoremap <F6> <Esc>yyp<c-v>$r=A
 
 noremap <C-S-I> :call <SID>SynStack()<CR>
 noremap <leader>cp :SyntasticJavacEditClasspath<CR>
@@ -381,7 +384,6 @@ noremap <leader>cp :SyntasticJavacEditClasspath<CR>
 let g:tex_flavor='latex'
 
 " default color scheme
-" colorscheme hybrid, molokai, lucius, lucius_dark, tomorrow-night-bright, xoria256, skittles_berry, jellybeans2, zenburn
 set background=dark
 if has("gui_running")
     colorscheme lucius_dark
@@ -645,7 +647,7 @@ set statusline+=%7*\ %p%%\
 set statusline+=%6*%5*\ \ %l:%c\
 " " }}}2
 
-" Maven
+" " Maven
 set makeprg=mvn\ compile\ -q\ -f\ .\pom.xml
 set errorformat=\[ERROR]\ %f:[%l\\,%v]\ %m
 
