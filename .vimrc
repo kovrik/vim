@@ -10,8 +10,10 @@ filetype off " required!
     " let neobundle_readme = expand('~/.vim/bundle/vundle/README.md')
     let neobundle_readme = expand('~/.vim/bundle/neobundle.vim/README.md')
     if !filereadable(neobundle_readme)
-        echo "Installing NeoBundle..."
         echo ""
+        echo "======================="
+        echo "Installing NeoBundle..."
+        echo "======================="
         silent !mkdir -p ~/.vim/bundle
         " silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
         silent !git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
