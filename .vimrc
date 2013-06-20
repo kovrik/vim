@@ -6,68 +6,76 @@ let auto_install_bundles = 1
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 filetype off " required!
 " === Setting up Vundle ==============================================
-    let vundle_installed = 0
-    let vundle_readme = expand('~/.vim/bundle/vundle/README.md')
-    if !filereadable(vundle_readme)
-        echo "Installing Vundle.."
+    let neobundle_installed = 0
+    " let neobundle_readme = expand('~/.vim/bundle/vundle/README.md')
+    let neobundle_readme = expand('~/.vim/bundle/neobundle.vim/README.md')
+    if !filereadable(neobundle_readme)
+        echo "Installing NeoBundle..."
         echo ""
         silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-        let vundle_installed = 1
+        " silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+        silent !git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+        let neobundle_installed = 1
     endif
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-    Bundle 'gmarik/vundle'
+    " set rtp+=~/.vim/bundle/vundle/
+    if has('vim_starting')
+        set runtimepath+=~/.vim/bundle/neobundle.vim/
+    endif
+
+    " call vundle#rc()
+    call neobundle#rc(expand('~/.vim/bundle/'))
+    " Bundle 'gmarik/vundle'
     "=== BUNDLES LIST ======================
-    Bundle 'godlygeek/tabular'
-    Bundle 'Raimondi/delimitMate'
-    Bundle 'vim-scripts/Colour-Sampler-Pack'
-    Bundle 'c9s/perlomni.vim'
-    Bundle 'vim-scripts/perl-support.vim'
-    Bundle 'vim-scripts/pmd.vim'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'fholgado/minibufexpl.vim'
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'thinca/vim-quickrun'
-    Bundle 'aaronbieber/quicktask'
+    NeoBundle 'godlygeek/tabular'
+    NeoBundle 'Raimondi/delimitMate'
+    NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+    NeoBundle 'c9s/perlomni.vim'
+    NeoBundle 'vim-scripts/perl-support.vim'
+    NeoBundle 'vim-scripts/pmd.vim'
+    " Bundle 'kien/ctrlp.vim'
+    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'fholgado/minibufexpl.vim'
+    NeoBundle 'scrooloose/nerdtree'
+    NeoBundle 'thinca/vim-quickrun'
+    NeoBundle 'aaronbieber/quicktask'
     " Bundle 'xolox/vim-session'
-    Bundle 'majutsushi/tagbar'
-    Bundle 'MarcWeber/vim-addon-mw-utils'
+    NeoBundle 'majutsushi/tagbar'
+    NeoBundle 'MarcWeber/vim-addon-mw-utils'
      " dependency
-    Bundle 'tomtom/tlib_vim'
-    Bundle 'vim-scripts/tComment'
-    Bundle 'vim-scripts/VisIncr'
-    Bundle 'wikitopian/hardmode'
-    Bundle 'Shougo/neocomplcache.vim'
-    Bundle 'Shougo/neosnippet.vim'
-    " Bundle 'Shougo/unite.vim'
-    Bundle 'Shougo/vimproc.vim'
-    Bundle 'scrooloose/syntastic'
-    Bundle 'vim-scripts/closetag.vim'
-    Bundle 'paradigm/TextObjectify'
-    Bundle 'coderifous/textobj-word-column.vim'
-    Bundle 'kovrik/lucius_dark'
+    NeoBundle 'tomtom/tlib_vim'
+    NeoBundle 'vim-scripts/tComment'
+    NeoBundle 'vim-scripts/VisIncr'
+    NeoBundle 'wikitopian/hardmode'
+    NeoBundle 'Shougo/neocomplcache.vim'
+    NeoBundle 'Shougo/neosnippet.vim'
+    NeoBundle 'Shougo/unite.vim'
+    " Bundle 'Shougo/vimproc.vim'
+    NeoBundle 'scrooloose/syntastic'
+    NeoBundle 'vim-scripts/closetag.vim'
+    NeoBundle 'paradigm/TextObjectify'
+    NeoBundle 'coderifous/textobj-word-column.vim'
+    NeoBundle 'kovrik/lucius_dark'
     " Bundle 'ervandew/eclim'
     " Bundle 'nathanaelkane/vim-indent-guides'
     " Bundle 'garbas/vim-snipmate'
     " Bundle 'Townk/vim-autoclose'
     " Bundle 'Gundo'
-    Bundle 'CSApprox'
-    Bundle 'ZenCoding.vim'
-    Bundle 'MatchTag'
-    Bundle 'matchit.zip'
-    Bundle 'javacomplete'
-    Bundle 'EasyGrep'
-    Bundle 'VimOutliner'
-    Bundle 'gnupg.vim'
+    NeoBundle 'CSApprox'
+    NeoBundle 'ZenCoding.vim'
+    NeoBundle 'MatchTag'
+    NeoBundle 'matchit.zip'
+    NeoBundle 'javacomplete'
+    NeoBundle 'EasyGrep'
+    NeoBundle 'VimOutliner'
+    NeoBundle 'gnupg.vim'
     "=== BUNDLES LIST END ==============
-    if vundle_installed == 1
+    if neobundle_installed == 1
         if auto_install_bundles == 1
             echo "Installing Bundles, please ignore key map error messages..."
             echo ""
-            :BundleInstall
+            " :BundleInstall
+            :NeoBundleInstall
         endif
     endif
 " === Setting up Vundle end ==============================================
@@ -406,8 +414,8 @@ let g:miniBufExplModSelTarget       = 1
 
 " CtrlP
 " Sane Ignore For ctrlp
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = { 'dir': '/.git$\|/.hg$\|/.svn$\|/tmp$|/bin$|/.cache$' }
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_custom_ignore = { 'dir': '/.git$\|/.hg$\|/.svn$\|/tmp$|/bin$|/.cache$' }
 
 " Tab completion
 function! Smart_TabComplete()
@@ -444,20 +452,20 @@ highlight SpecialKey  guifg=#333333
 
 " UNITE BEGIN =================
 " File searching like CtrlP
-" nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <C-p> :Unite file_rec/async<cr>
 
 " Content searching like ack.vim
-" nnoremap <space>/ :Unite grep:.<cr>
+nnoremap <space>/ :Unite grep:.<cr>
 
 " Buffer switching like LustyJuggers
-" nnoremap <space>s :Unite -quick-match buffer<cr>
+nnoremap <space>s :Unite -quick-match buffer<cr>
 
 " Yank history like yankring
 " nnoremap <space>y :Unite history/yanks<cr>
 " UNITE END   =================
 
 " " Don't save backups of *.gpg files
-" set backupskip+=*.gpg
+set backupskip+=*.gpg
 " " To avoid that parts of the file is saved to .viminfo when yanking or
 " " deleting, empty the 'viminfo' option.
 " set viminfo=
@@ -589,19 +597,6 @@ function! Mode()
         endif
     endif
 
-" no    Operator-pending
-" CTRL-V    Visual blockwise
-" s    Select by character
-" S    Select by line
-" CTRL-S    Select blockwise
-" Rv    Virtual Replace |gR|
-" cv    Vim Ex mode |gQ|
-" ce    Normal Ex mode |Q|
-" r    Hit-enter prompt
-" rm    The -- more -- prompt
-" r?    A |:confirm| query of some sort
-" !    Shell or external command is executing
-
     if l:mode ==# "n"
         return " NORMAL "
     elseif l:mode ==# "i"
@@ -656,4 +651,6 @@ set nopaste
 filetype on
 filetype plugin on
 filetype indent on
+
+NeoBundleCheck
 
