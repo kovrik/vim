@@ -2,10 +2,9 @@
 set nocompatible
 
 let auto_install_bundles = 1
-" =============== VUNDLE BEGIN ==============
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" =============== NEOBUNDLE BEGIN ==============
 filetype off " required!
-" === Setting up Vundle ==============================================
+" === Setting up NEOBUNDLE ==============================================
     let neobundle_installed = 0
     " let neobundle_readme = expand('~/.vim/bundle/vundle/README.md')
     let neobundle_readme = expand('~/.vim/bundle/neobundle.vim/README.md')
@@ -34,14 +33,12 @@ filetype off " required!
     NeoBundle 'c9s/perlomni.vim'
     NeoBundle 'vim-scripts/perl-support.vim'
     NeoBundle 'vim-scripts/pmd.vim'
-    " Bundle 'kien/ctrlp.vim'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'tpope/vim-fugitive'
     NeoBundle 'fholgado/minibufexpl.vim'
     NeoBundle 'scrooloose/nerdtree'
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'aaronbieber/quicktask'
-    " Bundle 'xolox/vim-session'
     NeoBundle 'majutsushi/tagbar'
     NeoBundle 'MarcWeber/vim-addon-mw-utils'
      " dependency
@@ -58,11 +55,6 @@ filetype off " required!
     NeoBundle 'paradigm/TextObjectify'
     NeoBundle 'coderifous/textobj-word-column.vim'
     NeoBundle 'kovrik/lucius_dark'
-    " Bundle 'ervandew/eclim'
-    " Bundle 'nathanaelkane/vim-indent-guides'
-    " Bundle 'garbas/vim-snipmate'
-    " Bundle 'Townk/vim-autoclose'
-    " Bundle 'Gundo'
     NeoBundle 'CSApprox'
     NeoBundle 'ZenCoding.vim'
     NeoBundle 'MatchTag'
@@ -74,24 +66,16 @@ filetype off " required!
     "=== BUNDLES LIST END ==============
     if neobundle_installed == 1
         if auto_install_bundles == 1
-            echo "Installing Bundles, please ignore key map error messages..."
-            echo ""
             " :BundleInstall
             :NeoBundleInstall
         endif
     endif
-" === Setting up Vundle end ==============================================
+" === Setting up NEOBUNDLE end ==============================================
 set background=dark
 set timeout timeoutlen=1000 ttimeoutlen=100
-
 set modelines=0
-" turn autoindentation on
 set autoindent
-" show line numbers
-set number
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
-" For regular expressions turn magic on
-set magic
 
 " tab = 4 spaces
 set tabstop=4
@@ -99,9 +83,6 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-set wildmenu
-set ttyfast
-set ruler
 " set undofile
 if version > 720
     set undofile
@@ -111,10 +92,8 @@ endif
 set cursorline
 set listchars=nbsp:¬,extends:»,precedes:«,trail:~
 set list
-
-set guioptions-=T " hide toolbar
-
-" hide scrollbars
+" hide toolbar and scrollbars
+set guioptions-=T
 set guioptions+=LlRrb
 set guioptions-=LlRrb
 
@@ -122,7 +101,12 @@ set wrap " turn on wrapping
 set textwidth=79
 set formatoptions=qrn1
 " set colorcolumn=85
- 
+" For regular expressions turn magic on
+set magic
+set wildmenu
+set ttyfast
+set ruler
+set number
 set vb
 set lbr                                    " wrap whole words
 set hidden                                 " не выгружать буфер когда переключаешься на другой
@@ -139,44 +123,33 @@ set backspace=indent,eol,start             " backspace обрабатывает 
 set sessionoptions=curdir,buffers,tabpages " опции сессий - перейти в текущию директорию, использовать буферы и табы
 set noswapfile                             " do not use swap file
 set browsedir=current
-
 " scrolling
-set scrolloff=8
+set scrolloff=10
 set sidescrolloff=15
 set sidescroll=1
-
 " keep indentation when pasting
 set pastetoggle=<F7>
-
 " search settings
 set ignorecase " ignore case when searching
 set smartcase  " - если искомое выражения содержит символы в верхнем регистре - ищет с учётом регистра, иначе - без учёта
 set hls        " highlight search results
 set incsearch  " incremental search
-
 " folding settings
-set foldenable          " enable folding
+set foldenable         " enable folding
 set foldmethod=indent
-set foldcolumn=2      " show folding column
-set foldlevel=999    " do not fold automatically
+set foldcolumn=2       " show folding column
+set foldlevel=999      " do not fold automatically
 
-set laststatus=2      " always show statusline
-
+set laststatus=2       " always show statusline
 " indent settings
 set cindent     " C-like indents
 set smartindent " smart indentation
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 set termencoding=utf8
 set fencs=utf-8,cp1251,koi8-r,cp866 " encodings order
 set ffs=unix,dos,mac " file format order
-
-" syntax highlighting on
-syntax on 
-
 set winaltkeys=no " disable menu access via ALT+<key>
-
 set guifont=Liberation\ Mono\ Bold\ 12
 
 let NERDTreeShowHidden=1
@@ -185,6 +158,8 @@ let NERDTreeShowHidden=1
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+let g:tex_flavor='latex'
 
 " syntastic tweaks
 let g:syntastic_enable_signs=1
@@ -251,32 +226,24 @@ function! DoWindowSwap()
 endfunction
 
 " === swap windows END
-
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 
 " Neocomplcache BEGIN =========================
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
-" Turn neocomplcache on
 let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
 let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
 let g:neocomplcache_enable_camel_case_completion = 1
-" Use underscore completion.
 let g:neocomplcache_enable_underbar_completion = 1
-" Sets minimum char length of syntax keyword.
 let g:neocomplcache_min_syntax_length = 3
 " buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
 let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
 
 " Recommended key-mappings.
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
+inoremap <expr><C-g> neocomplcache#undo_completion()
+inoremap <expr><C-l> neocomplcache#complete_common_string()
 
-" Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
@@ -294,7 +261,6 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " Neocomplcache END  =========================
 
 " neosnippet BEGIN ===========================
-" Plugin key-mappings.
 " inoremap <C-k> <Plug>(neosnippet_expand_or_jump)
 " snoremap <C-k> <Plug>(neosnippet_expand_or_jump)
 " xnoremap <C-k> <Plug>(neosnippet_expand_target)
@@ -331,6 +297,7 @@ inoremap <up>     <nop>
 inoremap <down>   <nop>
 inoremap <left>   <nop>
 inoremap <right>  <nop>
+
 noremap <Leader><CR> :nohlsearch<CR>
 
 " turns off Vim’s crazy default regex characters and makes searches use normal regexes
@@ -344,8 +311,6 @@ vnoremap > >gv
 " Treat long lines as break lines (useful when moving around in them)
 nnoremap j gj
 nnoremap k gk
-
-" nnoremap ; :
 
 " strip all trailing whitespaces
 nnoremap <leader>s :%s/\s\+$//<cr>:let @/=''<CR>
@@ -362,8 +327,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" delete into the black hole register
-nnoremap <leader>d "_d
 " force saving files that require root permissions
 cnoremap w!! %!sudo tee > /dev/null %
 
@@ -391,10 +354,7 @@ inoremap <F6> <Esc>yyp<c-v>$r=A
 noremap <C-S-I> :call <SID>SynStack()<CR>
 noremap <leader>cp :SyntasticJavacEditClasspath<CR>
 
-let g:tex_flavor='latex'
-
 " default color scheme
-set background=dark
 if has("gui_running")
     colorscheme lucius_dark
 else
@@ -413,11 +373,6 @@ let g:miniBufExplMapWindowNavVim    = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs  = 1
 let g:miniBufExplModSelTarget       = 1
-
-" CtrlP
-" Sane Ignore For ctrlp
-" let g:ctrlp_working_path_mode = 0
-" let g:ctrlp_custom_ignore = { 'dir': '/.git$\|/.hg$\|/.svn$\|/tmp$|/bin$|/.cache$' }
 
 " Tab completion
 function! Smart_TabComplete()
@@ -449,125 +404,22 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-highlight NonText     guifg=#444444 guibg=#333333
-highlight SpecialKey  guifg=#333333
+hi NonText    guifg=#444444 guibg=#333333
+hi SpecialKey guifg=#333333
 
 " UNITE BEGIN =================
 " File searching like CtrlP
 nnoremap <C-p> :Unite file_rec/async<cr>
-
 " Content searching like ack.vim
 nnoremap <space>/ :Unite grep:.<cr>
-
 " Buffer switching like LustyJuggers
 nnoremap <space>s :Unite -quick-match buffer<cr>
-
 " Yank history like yankring
 " nnoremap <space>y :Unite history/yanks<cr>
 " UNITE END   =================
 
 " " Don't save backups of *.gpg files
 set backupskip+=*.gpg
-" " To avoid that parts of the file is saved to .viminfo when yanking or
-" " deleting, empty the 'viminfo' option.
-" set viminfo=
-"
-" augroup encrypted
-"   au!
-"   " Disable swap files, and set binary file format before reading the file
-"   autocmd BufReadPre,FileReadPre *.gpg
-"     \ setlocal noswapfile bin
-"   " Decrypt the contents after reading the file, reset binary file format
-"   " and run any BufReadPost autocmds matching the file name without the .gpg
-"   " extension
-"   autocmd BufReadPost,FileReadPost *.gpg
-"     \ execute "'[,']!gpg --decrypt --default-recipient-self" |
-"     \ setlocal nobin |
-"     \ execute "doautocmd BufReadPost " . expand("%:r")
-"   " Set binary file format and encrypt the contents before writing the file
-"   autocmd BufWritePre,FileWritePre *.gpg
-"     \ setlocal bin | '[,']!gpg --encrypt --default-recipient-self
-"   " After writing the file, do an :undo to revert the encryption in the
-"   " buffer, and reset binary file format
-"   autocmd BufWritePost,FileWritePost *.gpg
-"     \ silent u |
-"     \ setlocal nobin
-" augroup END
-
-" " Unite {{{
-"     augroup UniteAutoCmd
-"       autocmd!
-"     augroup END
-"     function! s:unite_tabs_and_windows()
-"         nmap <buffer> <C-h> <C-w>h
-"         nmap <buffer> <C-j> <C-w>j
-"         nmap <buffer> <C-k> <C-w>k
-"         nmap <buffer> <C-l> <C-w>l
-"         imap <buffer> <C-h> <Esc><C-w>h
-"         imap <buffer> <C-j> <Esc><C-w>j
-"         imap <buffer> <C-k> <Esc><C-w>k
-"         imap <buffer> <C-l> <Esc><C-w>l
-"         nmap <buffer> H gT
-"         nmap <buffer> L gt
-"         nmap <buffer> <leader>x :bd!<CR>
-"     endfunction
-"     let g:unite_data_directory = '~/.vim/tmp/unite/'
-"     let g:unite_source_process_enable_confirm = 1
-"     let g:unite_source_history_yank_enable = 1
-"     let g:unite_enable_split_vertically = 0
-"     let g:unite_winheight = 20
-"     let g:unite_source_directory_mru_limit = 300
-"     let g:unite_source_file_mru_limit = 300
-"     let g:unite_source_file_mru_filename_format = ':~:.'
-"     let g:unite_source_grep_command = 'ack'
-"     let g:unite_source_grep_default_opts = '--column --no-color --nogroup --with-filename'
-"     let g:unite_source_grep_recursive_opt = ''
-"     nno <leader>a :<C-u>Unite grep -default-action=above<CR>
-"     nno <leader>A :<C-u>execute 'Unite grep:.::' . expand("<cword>") . ' -default-action=above -auto-preview'<CR>
-"     nno <leader>b :<C-u>Unite buffer -buffer-name=buffers -start-insert<CR>
-"     "nno <leader><leader> :<C-u>UniteWithCurrentDir buffer file -buffer-name=united -start-insert<CR>
-"     nno <leader>ps :<C-u>:Unite process -buffer-name=processes -start-insert<CR>
-"     nno <leader>u :<C-u>Unite<space>
-"     nno <C-p> :<C-u>:Unite history/yank -buffer-name=yanks<CR>
-"     nno // :<C-u>:Unite line -buffer-name=lines -start-insert -direction=botright -winheight=10<CR>
-"     function! s:unite_settings()
-"         imap <buffer> jj <Plug>(unite_insert_leave)
-"         imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
-"         imap <buffer> <leader> <Esc><leader>
-"         call s:unite_tabs_and_windows()
-"     endfunction
-"     autocmd UniteAutoCmd FileType unite call s:unite_settings()
-"     " wimviki replacement {{{
-"         map <leader>W :<C-u>Unite file file/new -buffer-name=notes -start-insert
-"                     \ -toggle -default-action=split -profile-name=files
-"                     \ -input=/Volumes/Vimwiki/<CR>
-"     " }}}
-"     " VimFiler {{{
-"         let g:vimfiler_data_directory = expand('~/.vim/tmp/vimfiler/')
-"         let g:vimfiler_safe_mode_by_default = 0
-"         let g:vimfiler_execute_file_list = { "_": "vim" }
-"         nno ` :<C-u>:VimFilerBufferDir -buffer-name=explorer -toggle<CR>
-"         function! s:vimfiler_settings()
-"             call s:unite_tabs_and_windows()
-"             nmap <buffer> - <Plug>(vimfiler_switch_to_parent_directory)
-"             nmap <buffer> % <Plug>(vimfiler_new_file)
-"             nmap <buffer> <Backspace> <C-^>
-"             nmap <buffer> <leader>x <Plug>(vimfiler_exit)
-"             nmap <buffer> <leader>X <Plug>(vimfiler_exit)
-"         endfunction
-"         autocmd UniteAutoCmd Filetype vimfiler call s:vimfiler_settings()
-"     " }}}
-"     " Ref {{{
-"         let g:ref_use_vimproc = 1
-"         let g:ref_open = 'vsplit'
-"         let g:ref_cache_dir = expand('~/.vim/tmp/ref_cache/')
-"         nno <leader>K :<C-u>Unite ref/erlang -buffer-name=erlang_docs -start-insert -vertical -default-action=split<CR>
-"     " }}}
-"     " netrw {{{
-"         let g:netrw_http_cmd='curl -0 -k -L -vv'
-"         let g:netrw_http_xcmd='-o'
-"     " }}}
-" " }}}
 
 " Statusline modifications, added Fugitive Status Line & Syntastic Error Message {{{2
 let g:last_mode = ''
@@ -577,12 +429,12 @@ function! Mode()
     if l:mode !=# g:last_mode
         let g:last_mode = l:mode
 
-        hi User2 guifg=#005f00 guibg=#dfff00 gui=BOLD ctermfg=22 ctermbg=190 cterm=BOLD
+        hi User2 guifg=#005f00 guibg=#dfff00 gui=BOLD    ctermfg=22  ctermbg=190 cterm=BOLD
         hi User3 guifg=#FFFFFF guibg=#414243 ctermfg=255 ctermbg=241
         hi User4 guifg=#414234 guibg=#2B2B2B ctermfg=241 ctermbg=234
-        hi User5 guifg=#4e4e4e guibg=#FFFFFF gui=bold ctermfg=239 ctermbg=255 cterm=bold
+        hi User5 guifg=#4e4e4e guibg=#FFFFFF gui=bold    ctermfg=239 ctermbg=255 cterm=bold
         hi User6 guifg=#FFFFFF guibg=#8a8a8a ctermfg=255 ctermbg=245
-        hi User7 guifg=#ffff00 guibg=#8a8a8a gui=bold ctermfg=226 ctermbg=245 cterm=bold
+        hi User7 guifg=#ffff00 guibg=#8a8a8a gui=bold    ctermfg=226 ctermbg=245 cterm=bold
         hi User8 guifg=#8a8a8a guibg=#414243 ctermfg=245 ctermbg=241
 
         if l:mode ==# 'n'
@@ -642,9 +494,9 @@ set statusline+=%{strlen(&filetype)>0?&filetype:''}
 set statusline+=\ %8*
 set statusline+=%7*\ %p%%\
 set statusline+=%6*%5*\ \ %l:%c\
-" " }}}2
+" }}}2
 
-" " Maven
+" Maven
 set makeprg=mvn\ compile\ -q\ -f\ .\pom.xml
 set errorformat=\[ERROR]\ %f:[%l\\,%v]\ %m
 
@@ -653,6 +505,7 @@ set nopaste
 filetype on
 filetype plugin on
 filetype indent on
+syntax on
 
 NeoBundleCheck
 
