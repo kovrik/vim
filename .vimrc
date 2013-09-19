@@ -49,11 +49,13 @@ filetype off " required!
     NeoBundle 'Shougo/neocomplcache.vim'
     NeoBundle 'Shougo/neosnippet.vim'
     NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'derekwyatt/vim-scala'
     " Bundle 'Shougo/vimproc.vim'
     NeoBundle 'scrooloose/syntastic'
     NeoBundle 'vim-scripts/closetag.vim'
     NeoBundle 'paradigm/TextObjectify'
     NeoBundle 'coderifous/textobj-word-column.vim'
+    NeoBundle 'christoomey/vim-tmux-navigator'
     NeoBundle 'kovrik/lucius_dark'
     NeoBundle 'CSApprox'
     NeoBundle 'ZenCoding.vim'
@@ -71,11 +73,14 @@ filetype off " required!
         endif
     endif
 " === Setting up NEOBUNDLE end ==============================================
+
+set clipboard=unnamed
 set background=dark
 set timeout timeoutlen=1000 ttimeoutlen=100
 set modelines=0
 set autoindent
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+" set keymap=russian-jcukenwin
 
 " tab = 4 spaces
 set tabstop=4
@@ -150,7 +155,7 @@ set termencoding=utf8
 set fencs=utf-8,cp1251,koi8-r,cp866 " encodings order
 set ffs=unix,dos,mac " file format order
 set winaltkeys=no " disable menu access via ALT+<key>
-set guifont=Liberation\ Mono\ Bold\ 12
+set guifont=Menlo\ Regular:h12
 
 let NERDTreeShowHidden=1
 
@@ -167,12 +172,11 @@ let g:syntastic_auto_jump=1
 
 " omnicompleteion
 set complete-=i
-set ofu=javacomplete#Complete
 
 " ========= AUTOCOMMANDS BEGIN  ======================
 autocmd BufWritePost .vimrc source % " Automatically refresh VIM after vimrc changes
 
-autocmd FileType java       set omnifunc=javacomplete#CompleteJava
+autocmd FileType java       set omnifunc=javacomplete#Complete
 autocmd FileType python     set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
@@ -186,7 +190,6 @@ autocmd FileType perl set makeprg=perl\ -c\ %\ $*
 autocmd FileType perl set errorformat=%f:%l:%m
 
 autocmd FileType crontab,fstab,make set noexpandtab tabstop=8 shiftwidth=8
-autocmd FileType scala set tabstop=2 shiftwidth=2 softtabstop=2
 
 " clear settings if editing crontab
 autocmd BufNewFile,BufRead crontab.* setfiletype crontab
@@ -508,4 +511,10 @@ filetype indent on
 syntax on
 
 NeoBundleCheck
+
+autocmd FileType scala   setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType *.scala setlocal tabstop=4 shiftwidth=4 softtabstop=4
+
+autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType *.hs    setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
