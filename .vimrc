@@ -57,6 +57,7 @@ filetype off " required!
     NeoBundle 'coderifous/textobj-word-column.vim'
     NeoBundle 'christoomey/vim-tmux-navigator'
     NeoBundle 'kovrik/lucius_dark'
+    NeoBundle 'w0ng/vim-hybrid'
     NeoBundle 'CSApprox'
     NeoBundle 'ZenCoding.vim'
     NeoBundle 'MatchTag'
@@ -359,12 +360,12 @@ noremap <leader>cp :SyntasticJavacEditClasspath<CR>
 
 " default color scheme
 if has("gui_running")
-    colorscheme lucius_dark
+    colorscheme jellybeans
 else
     if $TERM =~ "-256color"
-        colorscheme lucius_dark
+        colorscheme jellybeans
     else
-        colorscheme lucius_dark
+        colorscheme jellybeans
     endif
 endif
 
