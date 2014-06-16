@@ -35,6 +35,7 @@ filetype off " required!
     NeoBundle 'vim-scripts/pmd.vim'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'tpope/vim-fugitive'
+    " NeoBundle 'tpope/vim-vinegar'
     NeoBundle 'fholgado/minibufexpl.vim'
     NeoBundle 'scrooloose/nerdtree'
     NeoBundle 'thinca/vim-quickrun'
@@ -44,12 +45,13 @@ filetype off " required!
      " dependency
     NeoBundle 'tomtom/tlib_vim'
     NeoBundle 'vim-scripts/tComment'
-    NeoBundle 'vim-scripts/VisIncr'
+    " NeoBundle 'vim-scripts/VisIncr'
     NeoBundle 'wikitopian/hardmode'
     NeoBundle 'Shougo/neocomplcache.vim'
     NeoBundle 'Shougo/neosnippet.vim'
+    NeoBundle 'Shougo/neosnippet-snippets'
     NeoBundle 'Shougo/unite.vim'
-    NeoBundle 'derekwyatt/vim-scala'
+    " NeoBundle 'derekwyatt/vim-scala'
     " Bundle 'Shougo/vimproc.vim'
     NeoBundle 'scrooloose/syntastic'
     NeoBundle 'vim-scripts/closetag.vim'
@@ -57,6 +59,7 @@ filetype off " required!
     NeoBundle 'coderifous/textobj-word-column.vim'
     NeoBundle 'christoomey/vim-tmux-navigator'
     NeoBundle 'kovrik/lucius_dark'
+    NeoBundle 'kovrik/jellybeans.vim'
     NeoBundle 'w0ng/vim-hybrid'
     NeoBundle 'CSApprox'
     NeoBundle 'ZenCoding.vim'
@@ -64,8 +67,12 @@ filetype off " required!
     NeoBundle 'matchit.zip'
     NeoBundle 'javacomplete'
     NeoBundle 'EasyGrep'
-    NeoBundle 'VimOutliner'
+    " NeoBundle 'VimOutliner'
     NeoBundle 'gnupg.vim'
+    " NeoBundle 'VimClojure'
+    NeoBundle 'tpope/vim-fireplace'
+    NeoBundle 'tpope/vim-classpath'
+    NeoBundle 'guns/vim-clojure-static'
     "=== BUNDLES LIST END ==============
     if neobundle_installed == 1
         if auto_install_bundles == 1
@@ -75,7 +82,10 @@ filetype off " required!
     endif
 " === Setting up NEOBUNDLE end ==============================================
 
-set clipboard=unnamed
+if $TMUX == ''
+    set clipboard=unnamed
+endif
+
 set background=dark
 set timeout timeoutlen=1000 ttimeoutlen=100
 set modelines=0
@@ -235,7 +245,7 @@ nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 
 " Neocomplcache BEGIN =========================
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets'
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
@@ -243,6 +253,7 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 " buffer file name pattern that locks neocomplcache. e.g. ku.vim or fuzzyfinder
 let g:neocomplcache_lock_buffer_name_pattern = '\*ctrp\*'
+let g:neocomplcache_force_overwrite_completefunc = 1
 
 " Recommended key-mappings.
 inoremap <expr><C-g> neocomplcache#undo_completion()
@@ -360,12 +371,12 @@ noremap <leader>cp :SyntasticJavacEditClasspath<CR>
 
 " default color scheme
 if has("gui_running")
-    colorscheme jellybeans
+    colorscheme jellybeans_kovrik
 else
     if $TERM =~ "-256color"
-        colorscheme jellybeans
+        colorscheme jellybeans_kovrik
     else
-        colorscheme jellybeans
+        colorscheme jellybeans_kovrik
     endif
 endif
 
@@ -518,4 +529,7 @@ autocmd FileType *.scala setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType *.hs    setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+autocmd FileType clojure vnoremap <F10> :Eval<CR>
+autocmd FileType *.clj   vnoremap <F10> :Eval<CR>
 
